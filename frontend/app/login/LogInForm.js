@@ -35,7 +35,11 @@ export default function LogInForm() {
     setError('')
 
     try {
-      await makeLoginApiCall(contactData)
+      const data = await makeLoginApiCall(contactData)
+      // Save token to localStorage
+      localStorage.setItem('authToken', data.token)
+      // Save user info
+      localStorage.setItem('userInfo', JSON.stringify(data.userInfo))
       router.push('/user')
     } catch (error) {
       setError(error.message)

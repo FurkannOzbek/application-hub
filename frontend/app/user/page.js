@@ -1,10 +1,6 @@
 'use client'
 
-<<<<<<< HEAD
 import { useState, useEffect } from 'react'
-=======
-import { useState } from 'react'
->>>>>>> 47e2795 (fix: change structure of elements of control)
 import { Container, Box, Button, Stack } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import DashboardHeader from './DashboardHeader'

@@ -29,6 +29,14 @@ const sharedColors = {
   dashboard: { main: '#C5D5D4' },
 }
 
+const sharedColors = {
+  primary: { main: '#134B48' },
+  secondary: { main: '#BB8266' },
+  accent: { main: '#F4A261' },
+  paperCommon: { main: '#F7F7F7' },
+  dashboard: { main: '#C5D5D4' },
+}
+
 const commonStyles = {
   MuiButton: {
     styleOverrides: {

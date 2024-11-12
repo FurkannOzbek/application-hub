@@ -36,7 +36,7 @@ export default function User() {
           </Typography>
         </Paper>
         <Link href={`/register`}>
-          <Button variant="contained" sx={{ marginTop: 3 }}>
+          <Button variant="text" sx={{ marginTop: 3 }}>
             Sign up
           </Button>
         </Link>

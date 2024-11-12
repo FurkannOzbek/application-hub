@@ -4,184 +4,85 @@ import {
   AppBar,
   Toolbar,
   Box,
-  Container,
-  Typography,
   IconButton,
-  Paper,
-  List,
-  ListItem,
-  ListItemText,
+  Typography,
+  useTheme,
 } from '@mui/material'
-import { styled } from '@mui/system'
-import MenuIcon from '@mui/icons-material/Menu'
+import NotesIcon from '@mui/icons-material/Notes'
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
+import EditIcon from '@mui/icons-material/Edit'
+import MenuOpenIcon from '@mui/icons-material/MenuOpen'
+import PeopleIcon from '@mui/icons-material/People'
+import PreviewIcon from '@mui/icons-material/Preview'
+import Overview from './Overview'
+import Edit from './Edit'
+import Notes from './Notes'
+import Interview from './Interview'
+import Documents from './Documents'
+import CustomDrawer from './CustomDrawer'
 
-const DrawerWidth = '240px'
+const drawerWidth = '160px'
+const menuItems = [
+  { name: 'Overview', icon: <PreviewIcon /> },
+  { name: 'Edit', icon: <EditIcon /> },
+  { name: 'Notes', icon: <NotesIcon /> },
+  { name: 'Interview', icon: <PeopleIcon /> },
+  { name: 'Documents', icon: <InsertDriveFileIcon /> },
+]
 
-const CustomDrawer = styled(Paper)(({ open }) => ({
-  position: 'absolute',
-  top: '4px',
-  left: 0,
-  width: open ? DrawerWidth : 0,
-  height: 'calc(100% - 64px)',
-  transition: 'width 0.3s ease',
-  overflow: 'hidden',
-  zIndex: 1201,
-  marginRight: '10px',
-}))
+const components = {
+  Overview: <Overview />,
+  Edit: <Edit />,
+  Notes: <Notes />,
+  Interview: <Interview />,
+  Documents: <Documents />,
+}
 
-const AppBarStyled = styled(AppBar)({
-  position: 'relative',
-  zIndex: 1201,
-})
+export default function Dashboard() {
+  const theme = useTheme()
+  const [activeComponent, setActiveComponent] = useState(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
-const DashboardLayout = ({ children }) => {
-  const [open, setOpen] = useState(false)
-
-  const handleDrawerToggle = () => {
-    setOpen(!open)
+  const handleButtonClick = (component) => {
+    setActiveComponent(component)
+    setDrawerOpen(false)
   }
 
   return (
     <Box sx={{ width: '100%', minHeight: '100vh' }}>
-      <AppBarStyled>
-        <Toolbar>
+      <AppBar position="relative">
+        <Toolbar spacing={2}>
           <IconButton
             color="inherit"
             edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2 }}
+            onClick={() => setDrawerOpen(!drawerOpen)}
           >
-            <MenuIcon />
+            <MenuOpenIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Job application
+          <Typography variant="h6" noWrap sx={{ pl: 4 }}>
+            Job Application Dashboard
           </Typography>
         </Toolbar>
-      </AppBarStyled>
-
+      </AppBar>
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           marginTop: 0,
           position: 'relative',
+          bgcolor: theme.palette.dashboard.main,
         }}
       >
-        <CustomDrawer open={open}>
-          <List>
-            <ListItem>
-              <ListItemText primary="Overview" />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Edit" />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Notes" />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Interview" />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Document" />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Status" />
-            </ListItem>
-          </List>
-        </CustomDrawer>
-
-        <Box
-          sx={{
-            marginLeft: open ? DrawerWidth : 0,
-            paddingLeft: 2,
-            transition: 'margin-left 0.3s ease',
-            flexGrow: 1,
-            bgcolor: 'background.default',
-          }}
-        >
-          {children}
+        <CustomDrawer
+          drawerOpen={drawerOpen}
+          drawerWidth={drawerWidth}
+          menuItems={menuItems}
+          handleButtonClick={handleButtonClick}
+        />
+        <Box sx={{ flexGrow: 1, transition: 'margin-left 0.3s ease' }}>
+          {components[activeComponent] || <Overview />}
         </Box>
       </Box>
     </Box>
   )
 }
-
-const Dashboard = () => {
-  return (
-    <DashboardLayout>
-      <Box sx={{ marginTop: 4 }}>
-        <Typography variant="h6">Job description</Typography>
-        <Paper sx={{ padding: 2 }}>
-          An internship position for a frontend developer with a focus on
-          learning and development.
-        </Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Job link</Typography>
-        <Paper sx={{ padding: 2 }}>
-          https://www.lego.com/careers/intern-frontend
-        </Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">The expected salary</Typography>
-        <Paper sx={{ padding: 2 }}>0</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Applied date</Typography>
-        <Paper sx={{ padding: 2 }}>01.11.2024</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Deadline</Typography>
-        <Paper sx={{ padding: 2 }}>01.12.2024</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Notes</Typography>
-        <Paper sx={{ padding: 2 }}>Follow up with the company next week.</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Documents</Typography>
-        <Paper sx={{ padding: 2 }}>CV_User, Cover letter</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Status</Typography>
-        <Paper sx={{ padding: 2 }}>Applied</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Website company</Typography>
-        <Paper sx={{ padding: 2 }}>https://www.lego.com</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Location company</Typography>
-        <Paper sx={{ padding: 2 }}>Billund, Denmark</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Contact name</Typography>
-        <Paper sx={{ padding: 2 }}>Ole Kirk Christiansen</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Contact phone</Typography>
-        <Paper sx={{ padding: 2 }}>+45 79 50 60 70</Paper>
-      </Box>
-
-      <Box sx={{ marginTop: 2 }}>
-        <Typography variant="h6">Contact e-mail</Typography>
-        <Paper sx={{ padding: 2 }} elevation={6}>
-          contact@lego.com
-        </Paper>
-      </Box>
-    </DashboardLayout>
-  )
-}
-
-export default Dashboard

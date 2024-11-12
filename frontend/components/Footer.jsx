@@ -31,7 +31,7 @@ export default function Footer() {
       >
         <Box sx={{ mb: 2 }}>
           <Typography variant="h6" sx={{ mb: 1, fontWeight: 'bold' }}>
-            <Image src="./transparentLogo.png" alt="" width={100} />
+            <Image src="/transparentLogo.png" alt="" width={100} height={100} />
           </Typography>
           <Typography variant="body2" color={theme.palette.text.secondary}>
             &copy; {new Date().getFullYear()} ApplicationHub

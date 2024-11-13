@@ -92,7 +92,7 @@ export default function SignUpForm() {
           errors={errors}
           required
           pattern={{
-            value: /^[A-Za-z\s]{2,}$/,
+            value: /^.{2,}$/,
             message:
               'First name must contain only letters and be at least 2 characters long',
           }}
@@ -106,7 +106,7 @@ export default function SignUpForm() {
           errors={errors}
           required
           pattern={{
-            value: /^[A-Za-z\s]{2,}$/,
+            value: /^.{2,}$/,
             message:
               'First name must contain only letters and be at least 2 characters long',
           }}

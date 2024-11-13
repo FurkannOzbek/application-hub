@@ -12,7 +12,7 @@ import {
   Alert,
 } from '@mui/material'
 import InputField from '@/components/ui/InputField'
-import { makeLoginApiCall } from '@/components/fetches/useLogIn'
+import { makeLoginApiCall } from '@/components/fetches/makeLoginApiCall'
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
 

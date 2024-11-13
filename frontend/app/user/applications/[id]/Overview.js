@@ -21,7 +21,7 @@ const Overview = () => {
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.dashboard.main,
+        backgroundColor: 'dashboard.main',
         padding: isMobile ? 1 : 2,
       }}
     >
@@ -29,7 +29,7 @@ const Overview = () => {
         variant="h5"
         sx={{
           marginBottom: 3,
-          color: theme.palette.primary.main,
+          color: 'primary.main',
           textAlign: isMobile ? 'center' : 'left',
           fontWeight: 600,
         }}
@@ -40,8 +40,8 @@ const Overview = () => {
       <TableContainer
         component={Paper}
         sx={{
-          backgroundColor: theme.palette.paperCommon.main,
-          boxShadow: `0px 2px 6px ${theme.palette.primary.main}33`,
+          backgroundColor: 'paperCommon.main',
+          boxShadow: '0px 2px 6px primary.main33',
           overflowX: 'auto',
         }}
       >
@@ -60,7 +60,7 @@ const Overview = () => {
                     href="https://www.lego.com/careers/intern-frontend"
                     target="_blank"
                     sx={{
-                      color: theme.palette.primary.main,
+                      color: 'primary.main',
                       textDecoration: 'none',
                       '&:hover': { textDecoration: 'underline' },
                       wordBreak: 'break-word',
@@ -122,19 +122,17 @@ const Overview = () => {
                 sx={{
                   display: isMobile ? 'block' : 'table-row',
                   padding: isMobile ? '8px 0' : 0,
-                  borderBottom: isMobile
-                    ? `1px solid ${theme.palette.dashboard.main}`
-                    : 'none',
+                  borderBottom: isMobile ? '1px solid dashboard.main' : 'none',
                 }}
               >
                 <TableCell
                   sx={{
                     width: isMobile ? '100%' : '240px',
                     fontWeight: 600,
-                    color: theme.palette.secondary.main,
+                    color: 'secondary.main',
                     borderBottom: isMobile
                       ? 'none'
-                      : `1px solid ${theme.palette.dashboard.main}`,
+                      : '1px solid dashboard.main',
                     padding: isMobile ? '4px' : '16px',
                     fontSize: isMobile ? '0.9rem' : '1rem',
                     display: isMobile ? 'block' : 'table-cell',
@@ -146,7 +144,7 @@ const Overview = () => {
                   sx={{
                     borderBottom: isMobile
                       ? 'none'
-                      : `1px solid ${theme.palette.dashboard.main}`,
+                      : '1px solid dashboard.main',
                     padding: isMobile ? '4px' : '16px',
                     fontSize: isMobile ? '0.9rem' : '1rem',
                     color: theme.palette.primary.main,

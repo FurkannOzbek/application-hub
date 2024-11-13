@@ -36,7 +36,7 @@ export default function CustomDrawer({
   handleButtonClick,
 }) {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md')) // Mobile breakpoint
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <Box sx={styleCustomDrawer(drawerOpen, drawerWidth, isMobile)}>
@@ -54,7 +54,7 @@ export default function CustomDrawer({
                 right: 0,
                 bottom: 0,
                 height: '2px',
-                backgroundColor: theme.palette.secondary.main,
+                backgroundColor: 'secondary.main',
                 transform: 'scaleX(0)',
                 transformOrigin: 'right',
                 transition: 'transform 0.3s ease',
@@ -70,7 +70,7 @@ export default function CustomDrawer({
                   {
                     minWidth: 0,
                     justifyContent: 'center',
-                    color: theme.palette.primary.main,
+                    color: 'primary.main',
                   },
                   drawerOpen
                     ? {
@@ -88,7 +88,7 @@ export default function CustomDrawer({
                   <Typography
                     variant="body1"
                     sx={[
-                      { color: theme.palette.primary.main },
+                      { color: 'primary.main' },
                       drawerOpen
                         ? {
                             opacity: 1,

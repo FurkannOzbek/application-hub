@@ -1,5 +1,6 @@
 'use client'
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { useParams } from 'next/navigation'
 import {
   AppBar,
   Toolbar,
@@ -20,6 +21,7 @@ import Notes from './Notes'
 import Interview from './Interview'
 import Documents from './Documents'
 import CustomDrawer from './CustomDrawer'
+import { useApplicationsById } from '@/app/hooks/useApplicationsById'
 
 const drawerWidth = '160px'
 const menuItems = [
@@ -39,7 +41,9 @@ const components = {
 }
 
 export default function Dashboard() {
-  const theme = useTheme()
+  const params = useParams()
+  const id = params.id
+  const { application, isLoading, error } = useApplicationsById(id)
   const [activeComponent, setActiveComponent] = useState(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -70,7 +74,7 @@ export default function Dashboard() {
           flexDirection: 'row',
           marginTop: 0,
           position: 'relative',
-          bgcolor: theme.palette.dashboard.main,
+          bgcolor: 'dashboard.main',
         }}
       >
         <CustomDrawer

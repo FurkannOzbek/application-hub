@@ -1,6 +1,8 @@
 'use client'
-
+import { useParams } from 'next/navigation'
 import {
+  CircularProgress,
+  Alert,
   Box,
   Typography,
   Link,
@@ -13,10 +15,33 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material'
+import { useApplicationsById } from '@/app/hooks/useApplicationsById'
 
 const Overview = () => {
+  const params = useParams()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const id = params.id
+  const { application, isLoading, error } = useApplicationsById(id)
+  if (isLoading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
+  if (error) {
+    return (
+      <Alert severity="error" sx={{ m: 4 }}>
+        {error}
+      </Alert>
+    )
+  }
+  if (!application) return <Typography>No data available.</Typography>
+
+  if (!application) {
+    return <Typography>No application data available</Typography>
+  }
 
   return (
     <Box
@@ -49,9 +74,8 @@ const Overview = () => {
           <TableBody>
             {[
               {
-                title: 'Job description',
-                content:
-                  'An internship position for a frontend developer with a focus on learning and development. An internship position for a frontend developer with a focus on learning and development.An internship position for a frontend developer with a focus on learning and development.An internship position for a frontend developer with a focus on learning and development.An internship position for a frontend developer with a focus on learning and development.',
+                title: 'Lob description',
+                content: application.job_description,
               },
               {
                 title: 'Job link',
@@ -66,21 +90,22 @@ const Overview = () => {
                       wordBreak: 'break-word',
                     }}
                   >
-                    https://www.lego.com/careers/intern-frontend
+                    {application.job_link}
                   </Link>
                 ),
               },
               {
                 title: 'The expected salary',
-                content: 'Unpaid',
+                content:
+                  application.salary === 0 ? 'Unpaid' : application.salary,
               },
               {
                 title: 'Applied date',
-                content: '01.11.2024',
+                content: application.applied_date,
               },
               {
                 title: 'Deadline for applying',
-                content: '01.12.2024',
+                content: application.deadline_date,
               },
               {
                 title: 'Website company',
@@ -95,24 +120,24 @@ const Overview = () => {
                       wordBreak: 'break-word',
                     }}
                   >
-                    https://www.lego.com
+                    {application.website}
                   </Link>
                 ),
               },
               {
                 title: 'Location company',
-                content: 'Billund, Denmark',
+                content: application.location,
               },
               {
                 title: 'Contact name',
-                content: 'Ole Kirk Christiansen',
+                content: application.contact_name,
               },
               {
                 title: 'Contact details',
                 content: (
                   <>
-                    <Typography>Phone: +45 79 50 60 70</Typography>
-                    <Typography>Email: contact@lego.com</Typography>
+                    <Typography>Phone: {application.contact_phone}</Typography>
+                    <Typography>Email: {application.contact_email}</Typography>
                   </>
                 ),
               },
@@ -147,7 +172,7 @@ const Overview = () => {
                       : '1px solid dashboard.main',
                     padding: isMobile ? '4px' : '16px',
                     fontSize: isMobile ? '0.9rem' : '1rem',
-                    color: theme.palette.primary.main,
+                    color: 'primary.main',
                     display: isMobile ? 'block' : 'table-cell',
                   }}
                 >

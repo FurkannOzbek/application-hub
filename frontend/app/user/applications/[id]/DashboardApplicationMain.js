@@ -1,14 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { useParams } from 'next/navigation'
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  IconButton,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { AppBar, Toolbar, Box, IconButton, Typography } from '@mui/material'
 import NotesIcon from '@mui/icons-material/Notes'
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
 import EditIcon from '@mui/icons-material/Edit'
@@ -21,7 +13,6 @@ import Notes from './Notes'
 import Interview from './Interview'
 import Documents from './Documents'
 import CustomDrawer from './CustomDrawer'
-import { useApplicationsById } from '@/app/hooks/useApplicationsById'
 
 const drawerWidth = '160px'
 const menuItems = [
@@ -40,10 +31,7 @@ const components = {
   Documents: <Documents />,
 }
 
-export default function Dashboard() {
-  const params = useParams()
-  const id = params.id
-  const { application, isLoading, error } = useApplicationsById(id)
+export default function DashboardApplicationMain() {
   const [activeComponent, setActiveComponent] = useState(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
 

@@ -11,7 +11,7 @@ import {
   Alert,
 } from '@mui/material'
 import InputField from '@/components/ui/InputField'
-import { makeSignUpApiCall } from '@/components/fetches/useSignUp'
+import { makeSignUpApiCall } from '@/components/fetches/makeSignUpApiCall'
 import { useRouter } from 'next/navigation'
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
@@ -35,7 +35,11 @@ export default function SignUpForm() {
     setError('')
 
     try {
-      await makeSignUpApiCall(userData)
+      const data = await makeSignUpApiCall(userData)
+      // Save token to localStorage
+      localStorage.setItem('authToken', data.token)
+      // Save user info
+      localStorage.setItem('userInfo', JSON.stringify(data.userInfo))
       router.push('/user')
     } catch (error) {
       setError(error.message)
